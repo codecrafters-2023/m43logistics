@@ -547,6 +547,13 @@ nav {
     }
 }
 
+@media (max-width: 576px) {
+    #navbar .main_menu_div {
+        margin-left: 0px;
+        padding-left: 110px !important;
+    }
+}
+
 /*======= Carousel Container ===========*/
 
 
