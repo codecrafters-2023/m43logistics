@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooth Animated Carousel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        :root {
+            --white-color: #fff;
+        }
+
+        /* Carousel styles */
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-height: 90vh;
+            height: 90vh;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: fadeInImage 5s forwards;
+        }
+
+        .carousel-slide .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Overlay color */
+            z-index: 1;
+        }
+
+        .carousel-slide .content_div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2; /* Above the overlay */
+            text-align: center;
+        }
+
+        .carousel-slide h1 {
+            color: var(--white-color);
+            font-size: 4rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            animation: slideInText 1.5s forwards;
+        }
+
+        /* Navigation buttons */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: var(--white-color);
+            border: none;
+            cursor: pointer;
+            font-size: 2rem;
+            padding: 10px;
+            z-index: 10;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .nav-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        /* Keyframes for animations */
+        @keyframes fadeInImage {
+            0% {
+                opacity: 0;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes slideInText {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<section>
+    <div class="carousel">
+        <!-- Slide 1 -->
+        <div class="carousel-slide" style="display: flex;">
+            <div class="overlay"></div>
+            <img src="assets/images/slider/bailey-alexander-CuCnnDyvFSM-unsplash.jpg" alt="Truck 1">
+            <div class="content_div">
+                <h1>Delivering Trust, One Mile at a Time.</h1>
+            </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="carousel-slide">
+            <div class="overlay"></div>
+            <img src="assets/images/slider/jahongir-ismoilov-fENr719OgCU-unsplash.jpg" alt="Truck 2">
+            <div class="content_div">
+                <h1>Powering Your Freight Forward</h1>
+            </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="carousel-slide">
+            <div class="overlay"></div>
+            <img src="assets/images/slider/rick-steinhauer-Wib7kVoPlgY-unsplash.jpg" alt="Truck 3">
+            <div class="content_div">
+                <h1>Logistics Simplified for Every Journey</h1>
+            </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <button class="nav-btn prev" onclick="prevSlide()">&#10094;</button>
+        <button class="nav-btn next" onclick="nextSlide()">&#10095;</button>
+    </div>
+</section>
+
+<script>
+    const slides = document.querySelectorAll('.carousel-slide');
+    let currentSlide = 0;
+    const slideInterval = 5000; // 5 seconds
+
+    // Show a specific slide
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.style.display = i === index ? 'flex' : 'none';
+        });
+    }
+
+    // Move to the next slide
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    // Move to the previous slide
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    // Automatic slide movement
+    setInterval(nextSlide, slideInterval);
+
+    // Initialize the first slide
+    showSlide(currentSlide);
+</script>
+
+</body>
+</html>
